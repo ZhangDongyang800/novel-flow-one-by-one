@@ -1,256 +1,116 @@
 <div align="center">
 
+
 # Novel Flow / 小说流
 
-**AI 辅助长篇小说写作系统，基于 Trae Skill 架构**
+[![Trae](https://img.shields.io/badge/Built%20for-Trae-blue)](https://trae.ai)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Skills](https://img.shields.io/badge/Skills-6-purple)](#架构)
+[![Styles](https://img.shields.io/badge/Styles-3-orange)](#写作风格)
 
-从灵感碰撞到逐章定稿，6 个协作 Skill 全流程覆盖。
-去 AI 味、结构化审查、风格规则引擎——让 AI 写出不像 AI 写的小说。
+**AI 辅助长篇小说写作系统**
 
-[快速开始](#快速开始) · [架构设计](#架构设计) · [核心特性](#核心特性) · [写作风格](#写作风格)
+6 个协作 Skill，从灵感到定稿全流程覆盖。
+去 AI 味 · 风格引擎 · 结构化审查 · 防漂移机制
+
+[快速开始](#快速开始) · [使用流程](#使用流程) · [目录结构](#目录结构)
 
 </div>
 
 ---
 
-## 它解决什么问题
+## ✨ 特性
 
-用 AI 写小说，最大的痛点不是"写不出来"，而是：
-
-- **AI 味太重**——"不禁""缓缓""仿佛""瞳孔微缩"，一眼假
-- **越写越飘**——第二章开始忘设定、忘风格、忘人物
-- **审查形同虚设**——review 永远"通过"，问题越积越多
-- **长篇不可控**——写到第 20 章和第 1 章风格完全不同
-
-小说流用**工程化思维**解决这些问题：
-
-| 问题 | 解决方案 |
-|------|---------|
-| AI 味 | 50+ 禁用词表 + 每风格专属去 AI 味规则 + 生成期自检 |
-| 越写越飘 | 每章强制读取 6 个上下文文件，HARD-GATE 锁定 |
-| 审查虚设 | 六维量化审查 + 2 项不通过即重写 + 结构化裁决 |
-| 长篇失控 | 双层状态模型 + 文件契约 + canon 同步机制 |
-
----
+- **去 AI 味引擎** — 50+ 禁用词表 + 句式/段落/对话/叙事去 AI 化规则，每 300-500 字自动自检
+- **风格规则系统** — 3 种内置风格（冷白描 / 系统爽文 / 怪诞悬疑），每种都是完整的规则引擎
+- **结构化审查** — 三层闸门 + 六维量化审查，2 项不通过即重写
+- **防漂移机制** — HARD-GATE 强制每章读取 6 个上下文文件，不允许偷懒跳步
+- **双层状态模型** — status + stage 独立追踪，文件契约统一定义格式
 
 ## 快速开始
 
-### 前置条件
+```bash
+# 1. 下载仓库
+git clone https://github.com/your-username/novel-flow.git
 
-- [Trae](https://trae.ai/) 编辑器（免费）
-- 一个想写的故事（哪怕只有一个模糊的想法）
+# 2. 复制到你的 Trae 项目
+cp -r novel-flow/skills  your-project/.trae/
+cp -r novel-flow/shared  your-project/.trae/
 
-### 三步启动
-
-```
-1. 将本仓库的 skills/ 和 shared/ 目录复制到你的 Trae 项目中
-2. 对 AI 说：/novel-brainstorm + 你的想法
-3. 回答 AI 的问题，确认后说：/novel-orchestrator
-```
-
-AI 会自动进入 **brainstorm → outline → draft → review → update** 循环，每一步都等你确认后才继续。
-
-### 完整流程
-
-```
-你："我想写一个末世生存的故事，主角是个普通人"
-  ↓
-brainstorm：问你 5-7 个问题（题材、主角、世界观、冲突、风格、字数）
-  ↓ 你确认 project.md
-orchestrator：路由到 outline
-  ↓
-outline：生成当前卷的章节路线
-  ↓ 你确认 outline.md
-orchestrator：路由到 draft
-  ↓
-draft：逐场景写作（每 300-500 字自检一次）
-  ↓ 你确认草稿
-orchestrator：路由到 review
-  ↓
-review：六维审查（事件推进、主角变化、记忆点、节奏、情绪、钩子）
-  ↓ 通过
-update：同步设定变更，推进到下一章
-  ↓
-回到 draft，写下一章
+# 3. 在 Trae 中打开项目，对 AI 说：
+/novel-brainstorm 我想写一个末世生存的故事，主角是个普通人
 ```
 
----
+## 使用流程
 
-## 架构设计
+```mermaid
+flowchart TB
+    A["💬 /novel-brainstorm + 你的想法"] --> B["❓ AI 问 5-7 个问题"]
+    B --> C["📋 生成 project.md + 人物卡"]
+    C --> D["👤 你确认设定"]
+    D --> E["🗺️ 生成 outline.md"]
+    E --> F["👤 你确认章节路线"]
+    F --> G["✍️ 逐场景写作<br/>每 300-500 字自检"]
+    G --> H["👤 你确认草稿"]
+    H --> I{"🔍 六维审查"}
+    I -->|pass| J["🔄 同步设定变更"]
+    I -->|minor_fix / rewrite| G
+    J --> K{"写下一章？"}
+    K -->|继续| G
+    K -->|完成| L["🎉 完成"]
 
-```
-用户 → novel-orchestrator（总控）
-         ├── novel-brainstorm（灵感收束 → project.md）
-         ├── novel-outline（章节规划 → outline.md）
-         ├── novel-draft（逐场景写作 → 正文）
-         ├── novel-review（六维审查 → 修改意见）
-         └── novel-update（设定同步 + 状态更新）
-```
-
-### 双层状态模型
-
-每个章节同时拥有 **status**（状态）和 **stage**（阶段）：
-
-- **status（6 个）**：`idea` → `planned` → `drafting` → `reviewing` → `done` → `blocked`
-- **stage（5 个）**：`brainstorm` → `outline` → `draft` → `review` → `update`
-
-### 文件契约
-
-所有文件格式由 `shared/file-contracts.md` 统一定义，包括字段类型、取值范围、所有者归属。这是整个系统的"数据字典"。
-
-### 项目文件结构
-
-```
-你的小说项目/
-├── project.md              # 项目设定（世界观、角色、风格、禁止事项）
-├── outline.md              # 章节路线（逐卷规划）
-├── project-state.md        # 项目状态（orchestrator 维护）
-├── 人物/
-│   ├── 主角.md              # 角色卡（画像、驱动力、变更记录）
-│   └── ...
-├── 章节/
-│   ├── chapter-001.md      # 章节元数据 + 修改意见 + 定稿摘要
-│   └── ...
-└── 【书名】/
-    └── 第1卷/
-        ├── chapter-001.md  # 纯正文
-        └── ...
+    style A fill:#e8f5e9
+    style D fill:#e3f2fd
+    style F fill:#e3f2fd
+    style H fill:#e3f2fd
+    style I fill:#fff8e1
+    style G fill:#fce4ec
+    style J fill:#f3e5f5
+    style L fill:#e8f5e9
 ```
 
----
+> 🟢 绿色 = AI 自动执行 · 🔵 蓝色 = 需要你确认 · 🟡🩷 黄粉 = 审查与修正
 
-## 核心特性
+## 架构
 
-### 1. 去 AI 味引擎
+```mermaid
+flowchart LR
+    U[用户] --> O[novel-orchestrator<br/>总控调度]
+    O --> B[novel-brainstorm<br/>灵感收束]
+    O --> L[novel-outline<br/>章节规划]
+    O --> D[novel-draft<br/>逐场景写作]
+    O --> R[novel-review<br/>六维审查]
+    O --> U2[novel-update<br/>设定同步]
+```
 
-不只是"写得好不好"，而是"写得像不像人"。
+## 写作风格
 
-**全局禁用词表（50+ 词）：**
-- 情绪词：不禁、缓缓、微微、淡淡、默默、暗暗、悄然、猛然……
-- 过渡词：然而、此外、与此同时、不仅如此……
-- 空洞修饰：仿佛、宛如、好似、犹如、如同……
-- AI 式抒情：宛如一幅画、仿佛时间静止了、空气中弥漫着……
-- AI 式反应：瞳孔微缩、倒吸一口凉气、嘴角微微上扬……
-
-**句式/段落/对话/叙事去 AI 化规则：**
-- 每 300 字内至少 2 个非"主谓宾"结构的句子
-- 段落长度必须参差不齐
-- 允许不完整的句子、口语化断句
-- 对话允许打断、省略、答非所问
-
-**生成期自检（每 300-500 字触发）：**
-- 禁用词扫描
-- 排版模式检测（碎片化分行、省略号泛滥）
-- AI 句式检测
-- 情绪表达方式检测
-- 叙述模式检测
-- 违反即重写最近段落
-
-### 2. 风格规则系统
-
-3 种内置风格，每种都是完整的规则引擎（不只是描述）：
-
-| 风格 | 适合类型 | 核心特征 |
-|------|---------|---------|
-| **冷白描** | 现实主义、历史、悬疑、战争 | 克制、冰山原则、情感内敛 |
-| **系统爽文** | 系统流、升级流、都市逆袭、玄幻修仙 | 憋屈→反转→爽、打脸升级、系统面板 |
-| **怪诞悬疑** | 规则怪谈、无限流、克苏鲁、智斗 | 规则设计、信息不对称、认知入侵、推理反转 |
-
-每种风格包含：句式规则、描写规则、对话规则、情绪规则、过渡规则、去 AI 味规则、禁止事项、示例片段。
-
-### 3. 结构化审查
-
-不是"写得不错/有问题"的模糊评价，而是量化裁决：
-
-**三层闸门：**
-1. 硬门槛（合规检查）—— 任务完成度、禁止事项、Canon 一致性、结尾质量、句式重复、伪文学腔
-2. 六维质量审查 —— 事件推进、主角变化、强记忆点、节奏、情绪线、章末钩子
-3. 升级感检查 —— 冲突升级、信息揭示、段落交替
-
-**量化判定：**
-- 6 维全部通过 → pass
-- 1 维问题 → minor_fix（改 3 处）
-- **2 维问题 → rewrite_required**
-- **3 维问题 → reject**
-
-### 4. 防漂移机制
-
-**每章强制读取 6 个文件（HARD-GATE）：**
-1. `outline.md` — 当前章任务
-2. `project.md` — 风格/世界观/禁止事项
-3. `styles/[风格名].md` — 句式/对话/情绪/去 AI 味规则
-4. `templates/guide.md` — 禁用词表/章末规则/自检流程
-5. `人物/` 角色卡 — 画像/驱动力/变更记录
-6. 前一章末尾 500 字 — 衔接
-
-不允许因为"之前读过"而跳过任何一个文件。
-
----
-
-## Skill 清单
-
-| Skill | 职责 | 输入 | 输出 |
-|-------|------|------|------|
-| `novel-orchestrator` | 总控调度、状态裁决 | 项目文件 | 路由决策 + 进度报告 |
-| `novel-brainstorm` | 灵感收束（5-7 个问题） | 用户想法 | `project.md` + `人物/` |
-| `novel-outline` | 逐卷章节规划 | `project.md` | `outline.md` |
-| `novel-draft` | 逐场景写作 + 生成期自检 | `outline.md` + 上下文 | 正文文件 |
-| `novel-review` | 三层闸门 + 六维审查 | 正文 | `修改意见` + 状态 |
-| `novel-update` | Canon 同步 + 状态更新 | 审查结果 | 变更日志 + 定稿摘要 |
-
----
+|     风格     | 适合类型                           | 核心特征                       |
+| :----------: | ---------------------------------- | ------------------------------ |
+|  **冷白描**  | 现实主义、历史、悬疑、战争         | 克制、冰山原则、情感内敛       |
+| **系统爽文** | 系统流、升级流、都市逆袭、玄幻修仙 | 憋屈→反转→爽、打脸升级         |
+| **怪诞悬疑** | 规则怪谈、无限流、克苏鲁、智斗     | 规则设计、信息不对称、认知入侵 |
 
 ## 目录结构
 
 ```
-小说流/
-├── README.md                           # 本文件
-├── shared/
-│   ├── file-contracts.md               # 文件契约（数据字典）
-│   └── state-rules.md                  # 状态流转规则
-└── skills/
-    ├── novel-orchestrator/
-    │   └── SKILL.md                    # 总控调度
-    ├── novel-brainstorm/
-    │   ├── SKILL.md                    # 灵感收束
-    │   └── templates/
-    │       ├── project.md              # project.md 模板
-    │       └── 人物卡.md               # 角色卡模板
-    ├── novel-outline/
-    │   ├── SKILL.md                    # 章节规划
-    │   └── templates/
-    │       └── outline.md              # outline.md 模板
-    ├── novel-draft/
-    │   ├── SKILL.md                    # 逐场景写作
-    │   ├── templates/
-    │   │   ├── guide.md                # 写作方法论 + 去 AI 味规则
-    │   │   └── chapter-xxx.md          # 章节文件模板
-    │   └── styles/
-    │       ├── 冷白描.md               # 冷白描风格规则
-    │       ├── 系统爽文.md              # 系统爽文风格规则
-    │       └── 怪诞悬疑.md             # 怪诞悬疑风格规则
-    ├── novel-review/
-    │   └── SKILL.md                    # 六维审查
-    └── novel-update/
-        └── SKILL.md                    # 设定同步
+novel-flow/
+├── skills/
+│   ├── novel-orchestrator/   # 总控调度
+│   ├── novel-brainstorm/     # 灵感收束
+│   │   └── templates/        # project.md · 人物卡.md
+│   ├── novel-outline/        # 章节规划
+│   │   └── templates/        # outline.md
+│   ├── novel-draft/          # 逐场景写作
+│   │   ├── templates/        # guide.md · chapter-xxx.md
+│   │   └── styles/           # 冷白描 · 系统爽文 · 怪诞悬疑
+│   ├── novel-review/         # 六维审查
+│   └── novel-update/         # 设定同步
+└── shared/
+    ├── file-contracts.md     # 文件契约（数据字典）
+    └── state-rules.md        # 状态流转规则
 ```
-
----
-
-## 设计理念
-
-> **AI 写小说最大的敌人不是"写不好"，而是"写得像 AI 写的"。**
-
-小说流的核心设计原则：
-
-1. **规则优于描述** —— 风格不是"写得像谁"，而是"必须遵守什么、禁止做什么"
-2. **自检优于事后审查** —— 每 300-500 字自我修正，不要等写完才发现问题
-3. **量化优于模糊** —— 审查结果不是"还不错"，而是"2 维不通过 → 重写"
-4. **强制优于自觉** —— HARD-GATE 锁定每章必读文件，不允许 AI 偷懒跳步
-5. **契约优于约定** —— 所有文件格式由 file-contracts.md 统一定义，不留解释空间
-
----
 
 ## License
 
-MIT
+[MIT](LICENSE)
