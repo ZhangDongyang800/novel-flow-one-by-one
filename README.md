@@ -40,7 +40,7 @@
 
 **其他 AI 工具：** 直接告诉 AI：
 ```
-安装这个 skill：https://github.com/ZhangDongyang800/novel-flow-one-by-one-.git
+安装这个 skill：https://github.com/ZhangDongyang800/novel-flow-one-by-one.git
 ```
 
 ## 使用流程
