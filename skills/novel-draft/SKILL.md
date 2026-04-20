@@ -55,7 +55,7 @@ You MUST complete these items in order:
    - **6 项全部 `[✓]` 后才能进入下一步。缺失任何一项不允许写正文。**
 2. **Write draft** — scene-by-scene writing with thinking pauses, prose to 【书名】/第X卷/chapter-xxx.md
 3. **Self-check** — verify word count, task completion, no contradictions
-4. **Hand off to orchestrator** — invoke novel-orchestrator after user confirms
+4. **Update status & hand off** — 将章节 status 改为 `reviewing`，然后调用 novel-orchestrator
 
 ---
 
@@ -200,10 +200,11 @@ digraph draft {
 
 ### Stage 4: 交给 orchestrator
 
-**目标：** 写完后直接交给总控调度，不等待用户确认。
+**目标：** 写完后更新章节状态，交给总控调度。
 
-1. 调用 `novel-orchestrator`，由 orchestrator 决定下一步（review → update → 下一章 draft）
-2. 用户可以在 orchestrator 层面随时中断或查看进度
+1. 将当前章节 frontmatter 中的 `status` 改为 `reviewing`
+2. 调用 `novel-orchestrator`，由 orchestrator 判定下一步（预期为 `novel-review`）
+3. **禁止直接开始写下一章**——下一章必须等 review 通过、update 完成后才能开始
 
 ---
 
@@ -212,7 +213,7 @@ digraph draft {
 - **直接写正文，不造中间产物** — 不要写 scene card、task card，直接产出章节文件和正文文件
 - **遵守 project.md 风格与禁止事项** — 风格要求和禁止事项是硬约束，不是建议
 - **字数参考 project.md 目标** — 字数可以超过目标，但不能低于目标的 90%
-- **写完直接交给 novel-orchestrator** — draft 的终态是调用 orchestrator，由 orchestrator 自动推进后续流程
+- **写完必须先 review 再写下一章** — draft 的终态是更新状态为 `reviewing` 并调用 orchestrator，由 orchestrator 路由到 review。禁止跳过 review 直接写下一章
 - **只产出章节文件和正文文件** — 不修改 project.md 或 outline.md，这两个文件的所有权分别属于 brainstorm 和 outline
 - **正文直接写入 【书名】/第X卷/chapter-xxx.md** — 不在章节文件中写正文草稿，正文直接写入按书名和卷组织的独立文件
 - **Scene-by-scene, not all-at-once** — 逐场景写作，每写完一个场景停下来思考

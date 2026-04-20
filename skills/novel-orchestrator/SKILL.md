@@ -12,7 +12,7 @@ description: |
 
 整个系统使用 **status + stage** 双层状态模型。status 共 6 个，stage 共 5 个。裁决逻辑严格按优先级执行。
 
-**自动推进模式：** 用户确认一次后，orchestrator 自动推进整个流程（draft → review → update → 下一章 draft），不需要每步都等用户确认。用户随时可以中断、查看进度、或提出修改。
+**流程顺序：draft → review → update → 下一章 draft。每一步都必须完成才能进入下一步，不允许跳过任何中间步骤。**
 
 <HARD-GATE>
 Do NOT make any routing decision without reading the actual project files first. Do NOT write or generate any artifact that belongs to another skill (no outlines, no drafts, no reviews). Every judgment MUST be based on file-level facts, not on conversation memory or assumptions. Violating this gate will corrupt the entire pipeline.
