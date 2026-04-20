@@ -71,6 +71,26 @@ novel-flow/
     └── state-rules.md        # State transition rules
 ```
 
+## FAQ
+
+**Q: AI didn't activate the skill and just wrote directly.**
+A: Make sure the `skills/` and `shared/` folders are placed directly under `.trae/`, not nested inside another folder. The path must be `.trae/skills/novel-orchestrator/SKILL.md`.
+
+**Q: The generated text still has an "AI flavor".**
+A: This is normal. AI models have inherent writing patterns. The skill system significantly reduces AI-isms through rules and self-checks, but can't eliminate them 100%. When you spot AI-isms, point them out — the review skill will catch and fix them.
+
+**Q: Math/logic errors in the text (e.g., wrong interest calculations).**
+A: AI models are weak at math. The skill includes a "verify calculations" rule, but it's not foolproof. Double-check any numbers in the output yourself.
+
+**Q: Chapter endings feel repetitive.**
+A: The skill now includes a "reader perspective re-read" self-check that catches repetition. If it still happens, tell the AI directly: "This ending is too similar to the last chapter, change it."
+
+**Q: The story drifts from the original setting.**
+A: The update skill auto-syncs setting changes after each chapter. If drift still occurs, check `project.md` — the AI may have silently changed settings without recording them.
+
+**Q: Brainstorm asks too many questions.**
+A: You can say "skip" or "I don't care about this" at any step. The system will use a default and move on.
+
 ## License
 
 [MIT](LICENSE)
