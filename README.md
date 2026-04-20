@@ -12,8 +12,6 @@
 6 collaborative Skills covering the full pipeline from idea to final draft.
 De-AI · Style Engine · Structured Review · Anti-Drift
 
-[Quick Start](#quick-start) · [Workflow](#workflow) · [Writing Styles](#writing-styles)
-
 **[中文](README_zh.md)**
 
 </div>
