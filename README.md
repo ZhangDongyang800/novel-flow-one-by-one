@@ -5,7 +5,7 @@
 
 [![Trae](https://img.shields.io/badge/Built%20for-Trae-blue)](https://trae.ai)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-6-purple)](#架构)
+[![Skills](https://img.shields.io/badge/Skills-6-purple)](#特性)
 [![Styles](https://img.shields.io/badge/Styles-3-orange)](#写作风格)
 
 **AI 辅助长篇小说写作系统**
@@ -13,7 +13,7 @@
 6 个协作 Skill，从灵感到定稿全流程覆盖。
 去 AI 味 · 风格引擎 · 结构化审查 · 防漂移机制
 
-[快速开始](#快速开始) · [使用流程](#使用流程) · [目录结构](#目录结构)
+[快速开始](#快速开始) · [使用流程](#使用流程) · [写作风格](#写作风格)
 
 </div>
 
@@ -29,61 +29,28 @@
 
 ## 快速开始
 
-```bash
-# 1. 下载仓库
-git clone https://github.com/your-username/novel-flow.git
+**Trae 用户：** 将 `skills` 和 `shared` 文件夹直接放到你项目的 `.trae` 目录下即可。
 
-# 2. 复制到你的 Trae 项目
-cp -r novel-flow/skills  your-project/.trae/
-cp -r novel-flow/shared  your-project/.trae/
+```
+你的项目/
+└── .trae/
+    ├── skills/     ← 复制进来
+    └── shared/     ← 复制进来
 ```
 
-## 也可以直接告诉AI：
+**其他 AI 工具：** 直接告诉 AI：
 ```
 安装这个 skill：https://github.com/ZhangDongyang800/novel-flow-one-by-one-.git
 ```
 
 ## 使用流程
 
-```mermaid
-flowchart TB
-    A["💬 /novel-brainstorm + 你的想法"] --> B["❓ AI 问 5-7 个问题"]
-    B --> C["📋 生成 project.md + 人物卡"]
-    C --> D["👤 你确认设定"]
-    D --> E["🗺️ 生成 outline.md"]
-    E --> F["👤 你确认章节路线"]
-    F --> G["✍️ 逐场景写作<br/>每 300-500 字自检"]
-    G --> H["👤 你确认草稿"]
-    H --> I{"🔍 六维审查"}
-    I -->|pass| J["🔄 同步设定变更"]
-    I -->|minor_fix / rewrite| G
-    J --> K{"写下一章？"}
-    K -->|继续| G
-    K -->|完成| L["🎉 完成"]
-
-    style A fill:#e8f5e9
-    style D fill:#e3f2fd
-    style F fill:#e3f2fd
-    style H fill:#e3f2fd
-    style I fill:#fff8e1
-    style G fill:#fce4ec
-    style J fill:#f3e5f5
-    style L fill:#e8f5e9
-```
-
-> 🟢 绿色 = AI 自动执行 · 🔵 蓝色 = 需要你确认 · 🟡🩷 黄粉 = 审查与修正
-
-## 架构
-
-```mermaid
-flowchart LR
-    U[用户] --> O[novel-orchestrator<br/>总控调度]
-    O --> B[novel-brainstorm<br/>灵感收束]
-    O --> L[novel-outline<br/>章节规划]
-    O --> D[novel-draft<br/>逐场景写作]
-    O --> R[novel-review<br/>六维审查]
-    O --> U2[novel-update<br/>设定同步]
-```
+1. 对 AI 说出你的想法（什么都行，甚至两个字"小说"），AI 会逐个问你题材、主角、世界观等问题，你只需要做选择题（选 A 还是选 B）
+2. 确认生成的 `project.md`（项目设定）和角色卡
+3. AI 自动生成章节大纲 `outline.md`，你确认章节路线
+4. AI 逐场景写正文，每 300-500 字自动检查 AI 味和排版问题
+5. 你确认草稿后，AI 执行六维审查（事件推进、主角变化、记忆点、节奏、情绪、钩子）
+6. 审查通过 → 自动同步设定变更 → 写下一章；不通过 → 修改后重新审查
 
 ## 写作风格
 
