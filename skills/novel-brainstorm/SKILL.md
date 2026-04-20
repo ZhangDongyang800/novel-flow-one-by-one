@@ -10,7 +10,7 @@ description: |
 
 把散乱灵感收敛成一个能直接开工的 `project.md` 和 `人物/` 文件夹。不写大纲、不写正文、不造设定集——只做一件事：**把模糊想法压实到足够清晰**。
 
-核心方法论：**渐进收束**。从碎片出发，每轮只聚焦一个维度、只问一个问题，逐步把题材、主角、世界观、冲突、风格、驱动机制、字数、非目标八个维度压实，最终组装 `project.md`。
+核心方法论：**渐进收束**。从碎片出发，每轮只聚焦一个维度、只问一个问题，逐步把题材、主题、主角与关系网、世界观、冲突与驱动力、开篇策略、写作风格、字数、非目标九个维度压实，最终组装 `project.md`。
 
 <HARD-GATE>
 Do NOT invoke novel-outline, novel-draft, or any other novel skill until project.md has been written AND the user has approved it. This applies regardless of how clear the idea seems — a half-baked project.md will poison every downstream skill.
@@ -30,15 +30,16 @@ You MUST complete these items in order:
 
 1. **Collect raw fragments** — record everything the user says, no judgment
 2. **Genre & atmosphere** — lock down story type and mood (with options)
-3. **Protagonist** — lock down who, what they want, what they fear, name (with options)
-4. **World** — lock down world type and core rules (with options)
-5. **Conflict** — lock down core tension and escalation logic (with options)
-6. **Writing style** — lock down text style (with options)
-7. **Long-form driver** — lock down what keeps readers reading (with options)
-8. **Word count** — lock down total and per-chapter targets (with options)
-9. **Non-goals** — lock down what NOT to write (with options)
-10. **Assemble project.md** — fill every field, trace each to user-confirmed content
-11. **Deliver & confirm** — show project.md, get user approval, hand off to orchestrator
+3. **Theme** — lock down what the story is ultimately about (with options)
+4. **Protagonist & relationships** — lock down who, key supporting characters, narrative POV, name (with options)
+5. **World** — lock down world type and core rules (with options)
+6. **Conflict & driver** — lock down core tension, escalation logic, and long-form driver (with options)
+7. **Opening strategy** — lock down how the story begins (with options)
+8. **Writing style** — lock down text style (with options)
+9. **Word count** — lock down total and per-chapter targets (with options)
+10. **Non-goals** — lock down what NOT to write (with options)
+11. **Assemble project.md** — fill every field, trace each to user-confirmed content
+12. **Deliver & confirm** — show project.md, get user approval, hand off to orchestrator
 
 ---
 
@@ -53,18 +54,19 @@ digraph brainstorm {
     start [label="用户提出小说想法", fillcolor="#d5f5e3"];
     collect [label="Step 1: 灵感采集\n自由记录", fillcolor="#eaf2f8"];
     genre [label="Step 2: 题材与气质", fillcolor="#eaf2f8"];
-    hero [label="Step 3: 主角", fillcolor="#eaf2f8"];
-    world [label="Step 4: 世界观", fillcolor="#eaf2f8"];
-    conflict [label="Step 5: 冲突", fillcolor="#eaf2f8"];
-    style [label="Step 6: 写作风格", fillcolor="#eaf2f8"];
-    driver [label="Step 7: 长篇驱动", fillcolor="#eaf2f8"];
+    theme [label="Step 3: 主题\n锁定主旨", fillcolor="#eaf2f8"];
+    hero [label="Step 4: 主角与关系网\n配角+视角", fillcolor="#eaf2f8"];
+    world [label="Step 5: 世界观", fillcolor="#eaf2f8"];
+    conflict [label="Step 6: 冲突与驱动力", fillcolor="#eaf2f8"];
+    opening [label="Step 6.5: 开篇策略", fillcolor="#eaf2f8"];
+    style [label="Step 7: 写作风格", fillcolor="#eaf2f8"];
     wordcount [label="Step 8: 字数规划", fillcolor="#eaf2f8"];
     nongoals [label="Step 9: 非目标", fillcolor="#eaf2f8"];
     assemble [label="Step 10: 组装 project.md", fillcolor="#fef9e7"];
     confirm [label="Step 11: 交付确认", shape=diamond, fillcolor="#fef9e7"];
     handoff [label="交给 orchestrator", shape=doublecircle, fillcolor="#d5f5e3"];
 
-    start -> collect -> genre -> hero -> world -> conflict -> style -> driver -> wordcount -> nongoals -> assemble -> confirm;
+    start -> collect -> genre -> theme -> hero -> world -> conflict -> opening -> style -> wordcount -> nongoals -> assemble -> confirm;
     confirm -> handoff [label="用户确认"];
     confirm -> assemble [label="打回（≤2次）"];
 }
@@ -112,9 +114,30 @@ digraph brainstorm {
 
 ---
 
-### Step 3: 主角
+### Step 2.5: 主题
 
-**目标：** 锁定"谁在经历这个故事"。
+**目标：** 锁定"这个故事最终想探讨什么"。
+
+- 基于已确认的题材，提出**一个**关于主题的问题，**附带 2-4 个选项**
+  - 选项应基于题材生成具体主题方向，不要给抽象词（如"人性""爱"），要给具体的主旨表述
+  - 示例（悬疑题材）："这个故事最终想探讨什么？"
+    - A. 在监控社会中，个人隐私和安全之间的边界在哪里
+    - B. 真相的代价——知道得越多，是否越危险
+    - C. 信任的脆弱——你以为是盟友的人，可能一直在监视你
+    - D. 没想好，先写再看
+  - 示例（末世题材）："这个故事最终想探讨什么？"
+    - A. 在资源枯竭的末世中，为了生存可以放弃多少人性
+    - B. 文明的碎片——当一切崩塌，什么值得重建
+    - C. 没想好，先写再看
+- 如用户选"没想好"，记录为"待定"，不追问
+
+**验证点：** 主题已确认（或标记为"待定"）。
+
+---
+
+### Step 3: 主角与关系网
+
+**目标：** 锁定"谁在经历这个故事，以及 ta 和哪些人产生纠葛"。
 
 - 提出关于主角的**一个**问题，**附带 2-4 个选项**
   - 示例："主角是什么样的人？"
@@ -131,8 +154,23 @@ digraph brainstorm {
     - E. 其他
 - 明确询问主角名字。如用户说"没想好"，给出 2-3 个建议名字供选择
 - 询问是否已有配角想法。如没有，建议 1-2 个配角类型
+- 追问关键配角，**附带选项**
+  - 示例："除了主角，故事里还有哪些关键角色？"
+    - A. 对手/敌人——与主角直接对立
+    - B. 导师/引路人——帮助主角成长
+    - C. 盟友/伙伴——与主角并肩作战
+    - D. 恋人/情感对象——与主角有情感线
+    - E. 其他
+  - 为每个确认的配角创建角色卡，在角色卡中明确"与主角关系"
+- 追问叙事视角，**附带选项**
+  - 示例："故事由谁的视角来讲述？"
+    - A. 主角第一人称（"我"）——读者只能知道主角知道的事
+    - B. 第三人称有限（跟随主角）——读者能看到主角的行动和部分想法
+    - C. 第三人称多视角——不同章节可以跟随不同角色
+    - D. 其他
+  - 叙事视角写入 project.md 的「写作风格.叙事视角」字段
 
-**验证点：** 主角画像、驱动力、名字已确认。
+**验证点：** 主角画像、驱动力、名字、关键配角、叙事视角已确认。
 
 ---
 
@@ -177,8 +215,31 @@ digraph brainstorm {
     - C. 波折不断，一环扣一环
     - D. 其他
 - 确认冲突与主角驱动力的咬合，**附带选项**
+- 追问长篇驱动机制，**附带选项**
+  - 示例："故事靠什么吸引读者一直读下去？"
+    - A. 角色成长弧光——看主角从弱变强、从迷茫到坚定
+    - B. 事件链条——悬念和反转，一环扣一环
+    - C. 世界观探索——逐步揭示世界的真相
+    - D. 人物关系博弈——多方势力的明争暗斗
+    - E. 其他
 
-**验证点：** 冲突类型、升级方向已确认。
+**验证点：** 冲突类型、升级方向、长篇驱动机制已确认。
+
+---
+
+### Step 5.5: 开篇策略
+
+**目标：** 锁定"故事怎么开头"。
+
+- 提出关于开篇的**一个**问题，**附带 2-4 个选项**
+  - 示例："你希望故事怎么开头？"
+    - A. 从事件中间开始（in media res）——直接进入紧张场景，不铺垫
+    - B. 从一个悬念画面开始——先给读者一个疑问，再慢慢展开
+    - C. 从日常中的异常开始——平静的日常中突然出现不对劲的细节
+    - D. 其他（你来描述）
+- 开篇策略写入 project.md 的「核心 Premise」中，追加一行"开篇策略：XXX"
+
+**验证点：** 开篇策略已确认。
 
 ---
 
@@ -195,23 +256,6 @@ digraph brainstorm {
 - 如用户选"其他"，追问 1-2 个具体偏好（句式长短？情绪浓度？对话密度？）
 
 **验证点：** 风格已确认，将写入 project.md 的「写作风格」字段。
-
----
-
-### Step 7: 长篇驱动机制
-
-**目标：** 确认"为什么能撑起长篇"。
-
-- 提出关于长篇驱动机制的**一个**问题，**附带 2-4 个选项**
-  - 示例："故事靠什么吸引读者一直读下去？"
-    - A. 角色成长弧光
-    - B. 事件链条（悬念和反转）
-    - C. 世界观探索
-    - D. 人物关系
-    - E. 其他
-- **问完这个问题后，STOP。等待用户回答。不要继续问其他问题。**
-
-**验证点：** 驱动机制已确认。
 
 ---
 
@@ -261,12 +305,16 @@ digraph brainstorm {
 
 ## 核心 Premise
 > 一句话：谁 + 在什么处境 + 必须做什么 + 否则会怎样
+> 开篇策略：XXX
 
-## 角色索引
+## 主题
+> [一句话主题]
+
+## 角色与关系
 > 详细角色信息见 `人物/` 文件夹
 
 - **[主角名字]** → `人物/[主角名字].md`（主角）
-- **[配角名字]** → `人物/[配角名字].md`
+- **[配角名字]** → `人物/[配角名字].md`（与主角关系：XX）
 
 ## 世界观硬规则
 - 规则 1：
@@ -332,7 +380,7 @@ digraph brainstorm {
 | 说"让我确认一下剩余的问题"然后列出多个问题 | 永远不要说"剩余的问题"，一次只问一个 |
 | 用户说"随便"就自行选择题材/风格 | 追问具体场景或提供选项让用户二选一 |
 | 听完描述直接写 project.md | 先完成所有维度的收束，再组装 project.md |
-| 在 brainstorm 阶段设计具体情节或章节 | 只收束到"种子"级别，具体情节留给 outline |
+| 在 brainstorm 阶段设计具体情节或章节 | 只收束到"种子"级别（主题/关系/冲突/开篇策略），具体情节留给 outline |
 | 跳过"非目标"字段 | 非目标是防止范围蔓延的关键护栏 |
 | 给出的选项太抽象（如"热血""温馨"） | 选项要具体、有区分度、带简短说明 |
 | 用户回答超出选项时强行归类 | 优先采纳用户的独特方向 |
@@ -349,5 +397,5 @@ digraph brainstorm {
 
 ### 参考文档
 
-- **`shared/file-contracts.md`**：project.md 和人物卡的字段规范定义（唯一真相源）
+- **`shared/file-contracts.md`**：project.md 和人物卡的字段规范定义（唯一真相源），包括"主题"和"角色与关系"字段
 - **`shared/state-rules.md`**：状态流转规则
