@@ -1,75 +1,76 @@
 <div align="center">
 
-
 # Novel Flow / 小说流
 
 [![Trae](https://img.shields.io/badge/Built%20for-Trae-blue)](https://trae.ai)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-6-purple)](#特性)
-[![Styles](https://img.shields.io/badge/Styles-3-orange)](#写作风格)
+[![Skills](https://img.shields.io/badge/Skills-6-purple)](#features)
+[![Styles](https://img.shields.io/badge/Styles-3-orange)](#writing-styles)
 
-**AI 辅助长篇小说写作系统**
+**AI-Powered Long-Form Novel Writing System**
 
-6 个协作 Skill，从灵感到定稿全流程覆盖。
-去 AI 味 · 风格引擎 · 结构化审查 · 防漂移机制
+6 collaborative Skills covering the full pipeline from idea to final draft.
+De-AI · Style Engine · Structured Review · Anti-Drift
 
-[快速开始](#快速开始) · [使用流程](#使用流程) · [写作风格](#写作风格)
+[Quick Start](#quick-start) · [Workflow](#workflow) · [Writing Styles](#writing-styles)
+
+**[中文](README_zh.md)**
 
 </div>
 
 ---
 
-## 快速开始
+## Quick Start
 
-**Trae 用户：** 将 `skills` 和 `shared` 文件夹直接放到你项目的 `.trae` 目录下即可。
+**Trae users:** Copy the `skills` and `shared` folders into your project's `.trae` directory.
 
 ```
-你的项目/
+your-project/
 └── .trae/
-    ├── skills/     ← 复制进来
-    └── shared/     ← 复制进来
+    ├── skills/     ← copy here
+    └── shared/     ← copy here
 ```
 
-**其他 AI 工具：** 直接告诉 AI：
+**Other AI tools:** Tell your AI:
 ```
-安装这个 skill：https://github.com/ZhangDongyang800/novel-flow-one-by-one.git
+Install this skill: https://github.com/ZhangDongyang800/novel-flow-one-by-one.git
 ```
 
-## 使用流程
+## Workflow
 
-1. 对 AI 说出你的想法（什么都行，甚至两个字"小说"），AI 会逐个问你题材、主角、世界观等问题，你只需要做选择题（选 A 还是选 B）
-2. 确认生成的 `project.md`（项目设定）和角色卡
-3. AI 自动生成章节大纲 `outline.md`，你确认章节路线
-4. AI 逐场景写正文，每 300-500 字自动检查 AI 味和排版问题
-5. 你确认草稿后，AI 执行六维审查（事件推进、主角变化、记忆点、节奏、情绪、钩子）
-6. 审查通过 → 自动同步设定变更 → 写下一章；不通过 → 修改后重新审查
+1. Tell AI your idea (anything works, even just the word "novel"). AI asks you genre, protagonist, world-building etc. — you just pick options (A or B)
+2. Confirm the generated `project.md` (project settings) and character cards
+3. AI auto-generates chapter outline `outline.md`, you confirm the chapter plan
+4. AI writes prose scene by scene, auto-checking for AI-isms and formatting every 300-500 words
+5. After you confirm the draft, AI runs a 6-dimension review (plot progress, character change, memorable moments, pacing, emotion, hooks)
+6. Review passes → auto-sync setting changes → write next chapter; fails → revise and re-review
 
-## 写作风格
+## Writing Styles
 
-|     风格     | 适合类型                           | 核心特征                       |
-| :----------: | ---------------------------------- | ------------------------------ |
-|  **冷白描**  | 现实主义、历史、悬疑、战争         | 克制、情感内敛       |
-| **系统爽文** | 系统流、升级流、都市逆袭、玄幻修仙 | 憋屈→反转→爽、打脸升级         |
-| **怪诞悬疑** | 规则怪谈、无限流、克苏鲁、智斗     | 规则设计、信息不对称、认知入侵 |
+| Style | Best For | Core Traits |
+| :---: | --- | --- |
+| **Cold Minimalist** | Realism, historical, mystery, war | Restrained, emotionally subtle |
+| **System Power Fantasy** | LitRPG, progression, urban, xianxia | Tension → reversal → payoff, face-slapping |
+| **Weird Suspense** | Rule-based horror, infinite flow, Cthulhu, mind games | Rule design, information asymmetry, cognitive intrusion |
 
-## 目录结构
+## Directory Structure
 
 ```
 novel-flow/
 ├── skills/
-│   ├── novel-orchestrator/   # 总控调度
-│   ├── novel-brainstorm/     # 灵感收束
-│   │   └── templates/        # project.md · 人物卡.md
-│   ├── novel-outline/        # 章节规划
+│   ├── novel-orchestrator/   # Orchestration
+│   ├── novel-brainstorm/     # Ideation & convergence
+│   │   └── templates/        # project.md · character card
+│   ├── novel-outline/        # Chapter planning
 │   │   └── templates/        # outline.md
-│   ├── novel-draft/          # 逐场景写作
+│   ├── novel-draft/          # Scene-by-scene writing
 │   │   ├── templates/        # guide.md · chapter-xxx.md
-│   │   └── styles/           # 冷白描 · 系统爽文 · 怪诞悬疑
-│   ├── novel-review/         # 六维审查
-│   └── novel-update/         # 设定同步
+│   │   └── styles/           # Cold Minimalist · System Power Fantasy · Weird Suspense
+│   ├── novel-review/         # 6-dimension review
+│   └── novel-update/         # Setting sync
 └── shared/
-    ├── file-contracts.md     # 文件契约（数据字典）
-    └── state-rules.md        # 状态流转规则
+    ├── file-contracts.md     # File contracts (data dictionary)
+    └── state-rules.md        # State transition rules
 ```
 
 ## License
