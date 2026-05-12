@@ -13,37 +13,37 @@ description: |
 核心方法论：**渐进收束**。从碎片出发，每轮只聚焦一个维度、只问一个问题，逐步把题材、主题、主角与关系网、世界观、冲突与驱动力、开篇策略、写作风格、字数、非目标九个维度压实，最终组装 `project.md`。
 
 <HARD-GATE>
-Do NOT invoke novel-outline, novel-draft, or any other novel skill until project.md has been written AND the user has approved it. This applies regardless of how clear the idea seems — a half-baked project.md will poison every downstream skill.
+在 project.md 写好且用户确认之前，不得调用 novel-outline、novel-draft 或任何其他 novel skill。无论想法看起来多清晰，半生不熟的 project.md 会毒害所有下游 skill。
 
-**Every turn MUST contain exactly one question with 2-4 options, then STOP and wait for the user's answer.** Do NOT ask multiple questions in a single turn. Do NOT combine multiple dimensions into one question. Do NOT say "让我确认一下剩余的问题" and then list several questions at once. One question. Wait for answer. Then next question.
+**每一轮对话必须只包含一个问题，附带 2-4 个选项，然后停下来等待用户回答。** 不要在一轮中问多个问题。不要把多个维度合并成一个问题。不要说"让我确认一下剩余的问题"然后列出多个问题。一个问题。等待回答。然后下一个问题。
 </HARD-GATE>
 
-## Anti-Pattern: "This Idea Is Clear Enough To Skip Brainstorm"
+## 反模式："这个想法够清楚了，可以跳过 brainstorm"
 
-Every novel project goes through this process. Even if the user says "I already know exactly what I want", you still need to extract and confirm the core premise, characters, world rules, conflict, and writing constraints into project.md. The brainstorm can be fast (3-4 rounds of questions) if the user's idea is well-formed, but it MUST produce a complete project.md and get user approval before proceeding.
-
----
-
-## Checklist
-
-You MUST complete these items in order:
-
-1. **Collect raw fragments** — record everything the user says, no judgment
-2. **Genre & atmosphere** — lock down story type and mood (with options)
-3. **Theme** — lock down what the story is ultimately about (with options)
-4. **Protagonist & relationships** — lock down who, key supporting characters, narrative POV, name (with options)
-5. **World** — lock down world type and core rules (with options)
-6. **Conflict & driver** — lock down core tension, escalation logic, and long-form driver (with options)
-7. **Opening strategy** — lock down how the story begins (with options)
-8. **Writing style** — lock down text style (with options)
-9. **Word count** — lock down total and per-chapter targets (with options)
-10. **Non-goals** — lock down what NOT to write (with options)
-11. **Assemble project.md** — fill every field, trace each to user-confirmed content
-12. **Deliver & confirm** — show project.md, get user approval, hand off to orchestrator
+每个小说项目都必须经过这个流程。即使有人说"我已经完全清楚要写什么"，你仍然需要提取并确认核心 premise、角色、世界规则、冲突和写作约束，产出 project.md。如果想法已经成型，brainstorm 可以很快（3-4 轮问题即可），但必须产出完整的 project.md 并得到用户确认后才能继续。
 
 ---
 
-## Process Flow
+## 检查清单
+
+你必须按顺序完成以下项目：
+
+1. **灵感采集** — 记录用户说的所有内容，不做评判
+2. **题材与气质** — 锁定故事类型和氛围（附带选项）
+3. **主题** — 锁定故事最终想探讨什么（附带选项）
+4. **主角与关系网** — 锁定主角是谁、关键配角、叙事视角、名字（附带选项）
+5. **世界观** — 锁定世界类型和核心规则（附带选项）
+6. **冲突与驱动力** — 锁定核心张力、升级逻辑和长篇驱动机制（附带选项）
+7. **开篇策略** — 锁定故事如何开始（附带选项）
+8. **写作风格** — 锁定文字风格（附带选项）
+9. **字数规划** — 锁定全书字数和每章目标（附带选项）
+10. **非目标** — 锁定不写什么（附带选项）
+11. **组装 project.md** — 填写每个字段，每个字段追溯到用户确认内容
+12. **交付确认** — 展示 project.md，获得用户确认，交给 orchestrator
+
+---
+
+## 流程图
 
 ```dot
 digraph brainstorm {
@@ -72,11 +72,11 @@ digraph brainstorm {
 }
 ```
 
-**The terminal state is invoking novel-orchestrator.** Do NOT invoke novel-outline, novel-draft, or any other novel skill. The ONLY skill you invoke after brainstorm is novel-orchestrator.
+**终态是调用 novel-orchestrator。** 不要调用 novel-outline、novel-draft 或任何其他 novel skill。brainstorm 完成后唯一调用的 skill 是 novel-orchestrator。
 
 ---
 
-## The Process
+## 流程
 
 ### Step 1: 灵感采集
 
@@ -362,16 +362,16 @@ digraph brainstorm {
 
 ---
 
-## Key Principles
+## 核心原则
 
-- **One question at a time** — 每轮只问一个问题，绝不抛出多个开放性问题
-- **Multiple choice with "Other"** — 每个问题附带 2-4 个具体选项 + "其他"，选项要具体、有区分度、带简短说明
-- **Options are starting points, not cages** — 给选项是为了降低回答门槛，不是限制创作方向。用户回答超出选项时，优先采纳
-- **Trace everything** — project.md 的每个字段和角色卡的每个字段都必须能追溯到用户确认内容，不得 AI 臆造
-- **Never assume "whatever"** — 用户说"随便""都行""你看着办"时，必须追问直到获得真实偏好
-- **Seed-level, not blueprint** — 只收束到"种子"级别（足够清晰但不需要详细），具体情节留给 outline 和 draft
+- **一次一个问题** — 每轮只问一个问题，绝不抛出多个开放性问题
+- **选择题 + "其他"** — 每个问题附带 2-4 个具体选项 + "其他"，选项要具体、有区分度、带简短说明
+- **选项是起点，不是牢笼** — 给选项是为了降低回答门槛，不是限制创作方向。用户回答超出选项时，优先采纳
+- **可追溯** — project.md 的每个字段和角色卡的每个字段都必须能追溯到用户确认内容，不得 AI 臆造
+- **绝不假设"随便"** — 用户说"随便""都行""你看着办"时，必须追问直到获得真实偏好
+- **种子级别，非蓝图** — 只收束到"种子"级别（足够清晰但不需要详细），具体情节留给 outline 和 draft
 
-## Anti-Patterns
+## 反模式清单
 
 | 错误行为 | 正确做法 |
 |----------|----------|
@@ -385,7 +385,7 @@ digraph brainstorm {
 | 给出的选项太抽象（如"热血""温馨"） | 选项要具体、有区分度、带简短说明 |
 | 用户回答超出选项时强行归类 | 优先采纳用户的独特方向 |
 
-## Cross-references
+## 交叉引用
 
 ### 上游
 

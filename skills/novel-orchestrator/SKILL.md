@@ -15,30 +15,30 @@ description: |
 **流程顺序：draft → review → update → 下一章 draft。每一步都必须完成才能进入下一步，不允许跳过任何中间步骤。**
 
 <HARD-GATE>
-Do NOT make any routing decision without reading the actual project files first. Do NOT write or generate any artifact that belongs to another skill (no outlines, no drafts, no reviews). Every judgment MUST be based on file-level facts, not on conversation memory or assumptions. Violating this gate will corrupt the entire pipeline.
+不先读取实际项目文件，不得做任何路由决策。不要代写或生成属于其他 skill 的产物（不写大纲、不写草稿、不做审查）。每个判断必须基于文件级事实，而非对话记忆或假设。违反此规则将破坏整个流水线。
 </HARD-GATE>
 
-## Anti-Pattern: "This System Is Simple Enough To Skip The Orchestrator"
+## 反模式："系统很简单，可以跳过 orchestrator"
 
-Every novel project goes through this process. Even if the project state seems obvious ("we were just drafting chapter 3"), you still need to scan the files, detect conflicts, and make a formal routing decision. The orchestrator can be fast (a few seconds of file scanning) if the state is clean, but it MUST read the files and follow the priority rules before routing. Skipping this step means you might route to the wrong skill, miss a blocked state, or silently ignore file conflicts that will cascade into downstream errors.
-
----
-
-## Checklist
-
-You MUST complete these items in order:
-
-1. **Scan project files** — check existence of project.md, outline.md, chapter files, project-state.md; build a file-fact snapshot
-2. **Conflict detection** — resolve inconsistencies between frontmatter, outline status, and project-state.md using priority rules
-3. **Judge current state** — determine status (6 values) and stage (5 values) based on resolved file facts
-4. **Select current chapter** — pick the correct chapter using priority rules, enforce no-skip rule
-5. **Route to skill** — output routing decision to the correct sub-skill
-6. **Handle blocked** — if blocked_reason is non-empty, follow blocked recovery flow
-7. **Progress report** — output natural-language progress report to the user
+每个小说项目都必须经过这个流程。即使项目状态看起来显而易见（"我们刚才在写第 3 章"），你仍然需要扫描文件、检测冲突、做出正式的路由决策。如果状态是干净的，orchestrator 可以很快（几秒的文件扫描），但必须在路由前读取文件并遵循优先级规则。跳过这一步意味着可能路由到错误的 skill、错过 blocked 状态，或者默默忽略会导致下游错误的文件冲突。
 
 ---
 
-## Process Flow
+## 检查清单
+
+你必须按顺序完成以下项目：
+
+1. **扫描项目文件** — 检查 project.md、outline.md、章节文件、project-state.md 的存在性；构建文件事实快照
+2. **冲突检测** — 使用优先级规则解决 frontmatter、outline 状态和 project-state.md 之间的不一致
+3. **裁决当前状态** — 基于解决后的文件事实，判定 status（6 个值）和 stage（5 个值）
+4. **选择当前章** — 使用优先级规则选中正确的章节，强制执行不跳章规则
+5. **路由到 skill** — 输出路由决策到正确的子 skill
+6. **处理 blocked** — 如果 blocked_reason 非空，按 blocked 恢复流程处理
+7. **输出进度报告** — 用自然语言向用户输出进度报告
+
+---
+
+## 流程图
 
 ```dot
 digraph orchestrator {
@@ -62,11 +62,11 @@ digraph orchestrator {
 }
 ```
 
-**The terminal state is routing to the correct sub-skill.** Do NOT write or generate any artifact. The ONLY output of this skill is a routing decision and a progress report.
+**终态是路由到正确的子 skill。** 不要代写或生成任何产物。本 skill 的唯一输出是路由决策和进度报告。
 
 ---
 
-## The Process
+## 流程
 
 ### Step 1: 扫描项目文件
 
@@ -247,18 +247,18 @@ orchestrator 是 project-state.md 的唯一所有者，在以下时机更新：
 
 ---
 
-## Key Principles
+## 核心原则
 
-- **File facts over memory** — 以文件事实为准，不依赖临时上下文记忆。每次裁决必须重新读取文件，不缓存判断
-- **Never write for other skills** — 不直接代写任何其他 skill 的产物。orchestrator 只裁决和路由，绝不越权
-- **Single-thread progression** — 单线程推进，同时只处理一个章节。多章并行会导致上下文混乱
-- **Conflict resolution by priority** — 冲突解决必须遵循本文定义的优先级规则：frontmatter > outline > project-state.md
-- **No-skip enforcement** — 不允许跳章，章节必须按 outline.md 中的顺序依次推进
-- **Always report progress** — 完成后用自然语言告诉用户当前进度和下一步，让用户保持掌控感
+- **文件事实优先于记忆** — 以文件事实为准，不依赖临时上下文记忆。每次裁决必须重新读取文件，不缓存判断
+- **绝不越权代写** — 不直接代写任何其他 skill 的产物。orchestrator 只裁决和路由，绝不越权
+- **单线程推进** — 单线程推进，同时只处理一个章节。多章并行会导致上下文混乱
+- **按优先级解决冲突** — 冲突解决必须遵循本文定义的优先级规则：frontmatter > outline > project-state.md
+- **强制不跳章** — 不允许跳章，章节必须按 outline.md 中的顺序依次推进
+- **始终输出进度报告** — 完成后用自然语言告诉用户当前进度和下一步，让用户保持掌控感
 
 ---
 
-## Anti-Patterns
+## 反模式清单
 
 | 错误行为 | 后果 | 正确做法 |
 |----------|------|----------|
@@ -270,9 +270,7 @@ orchestrator 是 project-state.md 的唯一所有者，在以下时机更新：
 | 忽略冲突（文件状态不一致时不处理） | 后续流程混乱 | 按 2a 优先级解决冲突 |
 | 多章并行（同时处理多个 drafting 章节） | 上下文混乱 | 单线程推进 |
 
----
-
-## Cross-references
+## 交叉引用
 
 ### 子 Skill 清单
 

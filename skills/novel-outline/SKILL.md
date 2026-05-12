@@ -14,30 +14,30 @@ description: |
 核心原则：**只做结构规划，不写正文。只详细规划当前卷。**
 
 <HARD-GATE>
-Do NOT start planning chapters without reading project.md first. Do NOT plan all volumes in detail at once — only the current volume gets detailed chapter plans; subsequent volumes get 1-2 sentence direction seeds. Planning the entire book upfront will produce rigid, disconnected outlines that cannot adapt to what actually gets written.
+未读取 project.md 不得开始规划章节。不要一次性详细规划所有卷——只对当前卷做详细章节规划；后续卷只给 1-2 句话方向种子。一次性规划全书会产生僵硬、脱节的大纲，无法根据实际写作内容进行调整。
 </HARD-GATE>
 
-## Anti-Pattern: "This Story Is Clear Enough To Plan All Chapters At Once"
+## 反模式："这个故事够清楚了，可以一次性规划所有章"
 
-Every novel project goes through this process one volume at a time. Even if the user says "I already have the full story mapped out", you still need to plan only the current volume in detail and give subsequent volumes just 1-2 sentence direction seeds. The outline can be fast if the user's vision is clear, but it MUST respect the incremental planning discipline. Planning all chapters upfront means you lock in assumptions before any writing happens, and those assumptions will inevitably conflict with what actually emerges during drafting.
-
----
-
-## Checklist
-
-You MUST complete these items in order:
-
-1. **Read project.md** — extract core premise, characters, world rules, conflict, writing style, word count targets; for subsequent plans also read completed volumes
-2. **Determine current volume** — first time = Volume 1; subsequent = next volume after all chapters done
-3. **Write full-story summary** — 2-3 sentences covering the entire book arc (revise based on actual written content for subsequent plans)
-4. **Write current volume goal** — specific, actionable goal with clear start/end states
-5. **Generate chapter list** — one-sentence task per chapter with structure tags (setup/build/climax/fallout)
-6. **Write future directions** — 1-2 sentences per subsequent volume as direction seeds
-7. **Deliver and confirm** — save outline.md, show summary to user, get approval, hand off to orchestrator
+每个小说项目都必须逐卷推进。即使有人说"我已经把整个故事想好了"，你仍然只能详细规划当前卷，后续卷只给 1-2 句话方向种子。如果想法确实很清晰，大纲可以很快完成，但必须遵守渐进规划的原则。一次性规划所有章意味着在实际写作开始前就锁死了所有假设，而这些假设不可避免地会与写作过程中浮现的内容产生冲突。
 
 ---
 
-## Process Flow
+## 检查清单
+
+你必须按顺序完成以下项目：
+
+1. **读取 project.md** — 提取核心 premise、角色、世界规则、冲突、写作风格、字数目标；后续规划时还要读取已完成卷
+2. **确定当前卷** — 首次 = 第 1 卷；后续 = 上一卷所有章 done 后的下一卷
+3. **写全书主线摘要** — 覆盖全书弧线的 2-3 句话（后续规划时基于实际写作内容修正）
+4. **写当前卷目标** — 具体、可执行的目标，包含明确的起始/结束状态
+5. **生成章节列表** — 每章一句任务说明 + 结构标记（setup/build/climax/fallout）
+6. **写后续方向** — 每个后续卷 1-2 句话方向种子
+7. **交付确认** — 保存 outline.md，向用户展示摘要，获得确认，交给 orchestrator
+
+---
+
+## 流程图
 
 ```dot
 digraph outline {
@@ -61,11 +61,11 @@ digraph outline {
 }
 ```
 
-**The terminal state is invoking novel-orchestrator.** Do NOT invoke novel-draft or any other novel skill directly. The ONLY skill you invoke after outline is novel-orchestrator.
+**终态是调用 novel-orchestrator。** 不要直接调用 novel-draft 或任何其他 novel skill。outline 完成后唯一调用的 skill 是 novel-orchestrator。
 
 ---
 
-## The Process
+## 流程
 
 ### Step 1: 读取 project.md
 
@@ -222,18 +222,18 @@ digraph outline {
 
 ---
 
-## Key Principles
+## 核心原则
 
-- **Incremental volume planning** — 只详细规划当前卷，后续卷只有 1-2 句话方向。后续规划时基于已写完的卷调整，不凭最初设想
-- **One sentence per chapter** — 每章只有一句任务说明，不拆 scene card / task card。任务说明要具体到可执行
-- **Structure tags are mandatory** — 每章必须填写结构标记（setup/build/climax/fallout），卷级结构约束必须满足
-- **Ground everything in project.md** — 所有规划必须有 project.md 依据，不凭空编造与设定矛盾的情节
-- **Adapt to reality, not the original plan** — 后续规划时基于已完成卷的实际走向调整方向，不按原计划硬套
-- **Single file output** — 只更新 outline.md 一个文件，不修改 project.md 或其他文件
+- **逐卷渐进规划** — 只详细规划当前卷，后续卷只有 1-2 句话方向。后续规划时基于已写完的卷调整，不凭最初设想
+- **每章一句任务说明** — 每章只有一句任务说明，不拆 scene card / task card。任务说明要具体到可执行
+- **结构标记必填** — 每章必须填写结构标记（setup/build/climax/fallout），卷级结构约束必须满足
+- **所有规划以 project.md 为依据** — 所有规划必须有 project.md 依据，不凭空编造与设定矛盾的情节
+- **适应现实，而非原计划** — 后续规划时基于已完成卷的实际走向调整方向，不按原计划硬套
+- **单文件产出** — 只更新 outline.md 一个文件，不修改 project.md 或其他文件
 
 ---
 
-## Anti-Patterns
+## 反模式清单
 
 | 错误行为 | 正确做法 |
 |----------|----------|
@@ -243,9 +243,7 @@ digraph outline {
 | 凭空编造与 project.md 矛盾的情节 | 所有规划基于 project.md |
 | 后续规划按原计划而非实际内容 | 基于已完成卷的实际走向调整 |
 
----
-
-## Cross-references
+## 交叉引用
 
 ### 上游
 

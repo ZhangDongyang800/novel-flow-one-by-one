@@ -22,16 +22,16 @@ description: |
 
 **未完成以上 6 步之前，绝对不允许写任何正文。违反此规则产出的章节将脱离故事计划、违反既定 canon、充满 AI 味。**
 
-Do NOT modify project.md or outline.md under any circumstances — these files are owned by novel-brainstorm and novel-outline respectively.
+任何情况下都不要修改 project.md 或 outline.md —— 这两个文件的所有权分别属于 novel-brainstorm 和 novel-outline。
 </HARD-GATE>
 
-## Anti-Pattern: "This Chapter Is Simple Enough To Write Without Reading The Outline"
+## 反模式："这一章很简单，不读大纲也能写"
 
-Every chapter goes through this process. Even if the task description seems obvious, you still need to read the outline task, the surrounding chapters' tasks (for continuity), and the project constraints before writing. Skipping this step produces chapters that drift from the story plan, introduce unintended canon conflicts, or miss structural hooks that the outline carefully placed. The read step takes seconds — skipping it wastes an entire chapter.
+每一章都必须经过这个流程。即使任务说明看起来显而易见，你仍然需要在动笔前读取大纲任务、前后章节的任务（确保连续性）以及 project 的约束条件。跳过这一步会导致章节偏离故事计划、引入意外的设定冲突，或错过大纲精心埋下的结构性钩子。读取只需要几秒钟——跳过它则浪费一整章。
 
-## Anti-Pattern: "I Already Read These Files In The Previous Chapter"
+## 反模式："上一章已经读过这些文件了"
 
-**This is the #1 cause of quality degradation in later chapters.** AI tends to skip Stage 1 from chapter 2 onwards, which causes:
+**这是导致后续章节质量下降的头号原因。** AI 倾向于从第二章开始跳过 Stage 1，这会导致：
 - guide.md 的去AI味禁用词表被遗忘 → AI 味回归
 - 风格文件的句式/对话/情绪规则被遗忘 → 风格漂移
 - 人物卡的变更记录被遗忘 → 角色不一致
@@ -41,11 +41,11 @@ Every chapter goes through this process. Even if the task description seems obvi
 
 ---
 
-## Checklist
+## 检查清单
 
-You MUST complete these items in order:
+你必须按顺序完成以下项目：
 
-1. **Read ALL 6 context files** — 逐一读取以下文件，每读完一个输出 `[✓] 文件名: 一句话摘要`：
+1. **读取全部 6 个上下文文件** — 逐一读取以下文件，每读完一个输出 `[✓] 文件名: 一句话摘要`：
    - `[ ] outline.md` — 当前章任务说明 + 前后章任务（确保衔接）
    - `[ ] project.md` — 风格要求 + 禁止事项 + 字数目标 + 世界观规则
    - `[ ] styles/[风格名].md` — 句式规则 + 对话规则 + 情绪规则 + 去AI味规则 + 禁止事项
@@ -53,13 +53,13 @@ You MUST complete these items in order:
    - `[ ] 人物/角色卡` — 主角画像 + 驱动力 + 配角信息 + 变更记录
    - `[ ] 前一章末尾 500 字` — 衔接点
    - **6 项全部 `[✓]` 后才能进入下一步。缺失任何一项不允许写正文。**
-2. **Write draft** — scene-by-scene writing with thinking pauses, prose to 【书名】/第X卷/chapter-xxx.md
-3. **Self-check** — verify word count, task completion, no contradictions
-4. **Update status & hand off** — 将章节 status 改为 `reviewing`，然后调用 novel-orchestrator
+2. **写草稿** — 逐场景写作，每场景后暂停思考，正文写入 `【书名】/第X卷/chapter-xxx.md`
+3. **自检** — 验证字数、任务完成度、无前后矛盾
+4. **更新状态并交接** — 将章节 status 改为 `reviewing`，然后调用 novel-orchestrator
 
 ---
 
-## Process Flow
+## 流程图
 
 ```dot
 digraph draft {
@@ -87,11 +87,11 @@ digraph draft {
 }
 ```
 
-**The terminal state is invoking novel-orchestrator.** Do NOT invoke novel-review or any other novel skill directly. The ONLY skill you invoke after draft is novel-orchestrator.
+**终态是调用 novel-orchestrator。** 不要直接调用 novel-review 或任何其他 novel skill。draft 完成后唯一调用的 skill 是 novel-orchestrator。
 
 ---
 
-## The Process
+## 流程
 
 ### Stage 1: 读取上下文
 
@@ -208,7 +208,7 @@ digraph draft {
 
 ---
 
-## Key Principles
+## 核心原则
 
 - **直接写正文，不造中间产物** — 不要写 scene card、task card，直接产出章节文件和正文文件
 - **遵守 project.md 风格与禁止事项** — 风格要求和禁止事项是硬约束，不是建议
@@ -216,12 +216,12 @@ digraph draft {
 - **写完必须先 review 再写下一章** — draft 的终态是更新状态为 `reviewing` 并调用 orchestrator，由 orchestrator 路由到 review。禁止跳过 review 直接写下一章
 - **只产出章节文件和正文文件** — 不修改 project.md 或 outline.md，这两个文件的所有权分别属于 brainstorm 和 outline
 - **正文直接写入 【书名】/第X卷/chapter-xxx.md** — 不在章节文件中写正文草稿，正文直接写入按书名和卷组织的独立文件
-- **Scene-by-scene, not all-at-once** — 逐场景写作，每写完一个场景停下来思考
-- **Think like a writer, not an executor** — 参照 `templates/guide.md`，像作家一样思考下一步
-- **Over, never under** — 字数可以超过目标，但不能低于目标的 90%。未达标必须继续写场景
-- **Self-correct while writing, not after** — 每 300-500 字执行生成期自检，违反风格规则立即重写，不要等到 review
+- **逐场景而非一次性写完** — 逐场景写作，每写完一个场景停下来思考
+- **像作家一样思考，而非执行器** — 参照 `templates/guide.md`，像作家一样思考下一步
+- **宁多勿少** — 字数可以超过目标，但不能低于目标的 90%。未达标必须继续写场景
+- **写中自纠，而非事后补救** — 每 300-500 字执行生成期自检，违反风格规则立即重写，不要等到 review
 
-## Anti-Patterns
+## 反模式清单
 
 | 错误行为 | 正确做法 |
 |----------|----------|
@@ -237,7 +237,7 @@ digraph draft {
 | 一次性写完整章不停下来思考 | 逐场景写作，每场景后思考 |
 | 总字数未达标就结束 | 必须继续写场景直到超过目标 |
 
-## Cross-references
+## 交叉引用
 
 ### 上游
 

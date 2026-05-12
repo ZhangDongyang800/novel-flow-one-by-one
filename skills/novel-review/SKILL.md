@@ -18,25 +18,25 @@ review 是唯一的质量闸门。guide.md 定义了写作规则，但 AI 不一
 4. **升级感检查**——和前几章相比，冲突有没有升级、有没有揭示新信息
 
 <HARD-GATE>
-Do NOT review without reading: 章节/chapter-xxx.md（目标）+ 正文 + project.md（风格）+ outline.md（任务）。
+未读取以下文件不得审查：`章节/chapter-xxx.md`（目标）+ 正文 + `project.md`（风格）+ `outline.md`（任务）。
 </HARD-GATE>
 
 ---
 
-## Checklist
+## 检查清单
 
-1. **Read files** — chapter file + prose + project.md + outline.md
-2. **Reader perspective** — read as a reader: filler? repetition? boring?
-3. **Banned-word scan** — 7.1 禁用词 + 7.4 伪文学腔 + 7.2 句式重复
-4. **Canon check** — new settings? conflicts with existing canon?
-5. **Escalation check** — conflict escalation vs previous chapters? new info revealed?
-6. **Verdict** — pass / minor-fix / rewrite / reject
-7. **Write feedback** — write to chapter file, present to user
-8. **Delivery** — invoke novel-update after user confirmation
+1. **读取文件** — 章节文件 + 正文 + project.md + outline.md
+2. **读者视角** — 以读者身份读：有没有废话？有没有重复？有没有走神？
+3. **禁用词扫描** — 7.1 禁用词 + 7.4 伪文学腔 + 7.2 句式重复
+4. **Canon 检查** — 新设定？与已有 canon 冲突？
+5. **升级感检查** — 与前几章相比冲突有没有升级？有没有揭示新信息？
+6. **判定** — 通过 / 小修 / 重写 / reject
+7. **写入意见** — 写入章节文件，向用户展示
+8. **交付** — 用户确认后调用 novel-update
 
 ---
 
-## Process Flow
+## 流程图
 
 ```dot
 digraph review {
@@ -76,11 +76,11 @@ digraph review {
 }
 ```
 
-**Terminal state: invoke novel-update → novel-orchestrator.** Do NOT invoke novel-draft directly for the next chapter.
+**终态：调用 novel-update → novel-orchestrator。** 不要直接调用 novel-draft 开始下一章。
 
 ---
 
-## The Process
+## 流程
 
 ### Step 1: 读取文件
 
@@ -278,7 +278,7 @@ digraph review {
 
 ---
 
-## Key Principles
+## 核心原则
 
 - **guide.md 管"怎么写"，review 管"写得怎么样"** — review 是唯一的质量闸门
 - **读者视角优先** — 先以读者身份感受，再对照规则检查
@@ -287,7 +287,7 @@ digraph review {
 - **小修 1 轮，重写 1 次** — 不无限循环
 - **用户确认闸门** — 每章通过后必须用户确认，防止错误无声扩散
 
-## Anti-Patterns
+## 反模式清单
 
 | 错误行为 | 正确做法 |
 |----------|----------|
@@ -296,7 +296,7 @@ digraph review {
 | 小修后要求改第 2 轮 | 小修只改 1 轮 |
 | 重写 2 次还不通过还不回退 | 最多 1 次，不行就回退 |
 
-## Cross-references
+## 交叉引用
 
 ### 上游
 - **`novel-draft`**：草稿完成后触发

@@ -10,29 +10,29 @@ description: |
 review 通过后的收尾工作。不做审查，只做同步——把章节产出中的事实变化反映到 project.md、outline.md 和角色卡中。
 
 <HARD-GATE>
-Do NOT invoke this skill unless novel-review has explicitly judged the chapter as "pass" (通过). Do NOT make any creative judgment — this skill only synchronizes facts from the chapter output into project.md and outline.md. Violating this gate means either updating canon for unapproved content or making creative decisions outside the review process.
+除非 novel-review 明确判定当前章为"通过"（pass），否则不得调用本 skill。不得做任何创作判断——本 skill 仅将章节产出中的事实同步到 project.md 和 outline.md。违反此规则意味着要么为未经批准的内容更新 canon，要么在 review 流程之外做了创作决策。
 </HARD-GATE>
 
-## Anti-Pattern: "This Chapter Doesn't Need Canon Update"
+## 反模式："这一章不需要更新 canon"
 
-Every chapter goes through this process after review passes. Even if the chapter introduced no new settings, no new characters, and no world-building changes, you still need to execute the full update flow — at minimum, update the outline status to done and write the chapter summary. Skipping the update because "nothing changed" is how outline statuses fall out of sync and chapter summaries go missing, making it impossible to track project progress later. A chapter with no canon changes will complete this process quickly — skipping it doesn't save time, it creates data gaps.
-
----
-
-## Checklist
-
-You MUST complete these items in order:
-
-1. **Read chapter files** — read 【书名】/第X卷/chapter-xxx.md (prose) + 章节/chapter-xxx.md (objective) + project.md + outline.md + 人物/ 文件夹中的角色卡
-2. **Update project.md canon** — check for setting changes, append to changelog if any
-3. **Update character cards** — check for character state changes, append to character card changelog if any
-4. **Update outline.md status** — change current chapter status to done
-5. **Write chapter summary** — write finalized summary (2-3 sentences) to chapter file
-6. **Hand off to orchestrator** — invoke novel-orchestrator to advance to next chapter
+每一章在 review 通过后都必须经过这个流程。即使本章没有引入新设定、新角色、世界观变化，你仍然需要完整执行更新流程——至少要更新 outline 状态为 done 并写入定稿摘要。因为"没有变化"而跳过更新，正是导致 outline 状态脱节、章节摘要缺失的原因，后续将无法追踪项目进展。一个没有 canon 变更的章节会很快完成这个流程——跳过它不会节省时间，只会造成数据缺口。
 
 ---
 
-## Process Flow
+## 检查清单
+
+你必须按顺序完成以下项目：
+
+1. **读取章节文件** — 读取 `【书名】/第X卷/chapter-xxx.md`（正文）+ `章节/chapter-xxx.md`（目标）+ `project.md` + `outline.md` + `人物/` 文件夹中的角色卡
+2. **更新 project.md canon** — 检查设定变更，如有则追加到变更日志
+3. **更新角色卡** — 检查角色状态变化，如有则追加到角色卡变更记录
+4. **更新 outline.md 状态** — 将当前章状态改为 done
+5. **写入定稿摘要** — 在章节文件中写入 2-3 句话定稿摘要
+6. **交给 orchestrator** — 调用 novel-orchestrator 推进到下一章
+
+---
+
+## 流程图
 
 ```dot
 digraph update {
@@ -52,11 +52,11 @@ digraph update {
 }
 ```
 
-**The terminal state is invoking novel-orchestrator.** Do NOT invoke novel-draft directly for the next chapter — always route through novel-orchestrator after the update is complete.
+**终态是调用 novel-orchestrator。** 不要直接调用 novel-draft 开始下一章——更新完成后始终通过 novel-orchestrator 进行路由。
 
 ---
 
-## The Process
+## 流程
 
 ### Step 1: 读取上下文
 
@@ -151,14 +151,14 @@ digraph update {
 
 ---
 
-## Key Principles
+## 核心原则
 
-- **Read-only on initial settings** — 只追加变更日志，不修改 project.md 和角色卡的初始设定 section
-- **Minimal and factual** — 变更日志只记录事实，不做评价
-- **Always update status** — 即使没有 canon 变更，也要更新 outline 状态和定稿摘要
-- **No creative judgment** — 不做任何创作判断，只做同步
+- **初始设定只读** — 只追加变更日志，不修改 project.md 和角色卡的初始设定 section
+- **最小化且事实性** — 变更日志只记录事实，不做评价
+- **始终更新状态** — 即使没有 canon 变更，也要更新 outline 状态和定稿摘要
+- **不做创作判断** — 不做任何创作判断，只做同步
 
-## Anti-Patterns
+## 反模式清单
 
 | 错误行为 | 正确做法 |
 |----------|----------|
@@ -168,7 +168,7 @@ digraph update {
 | 在变更日志中写评价 | 只记录事实 |
 | 不更新 outline 状态 | 每次都更新 |
 
-## Cross-references
+## 交叉引用
 
 ### 上游
 
